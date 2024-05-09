@@ -45,7 +45,7 @@ export default function Auth() {
             <h1 className="text-5xl text-white font-poppinsBold">Realm.</h1>
           </div>
         </div>
-        <div className="bg-[#2A2A2A] min-h-screen w-full flex items-center justify-center lg:w-1/3">
+        <div className="bg-[#2A2A2A] min-h-screen min-w-full flex items-center justify-center lg:w-1/3">
           <div className="">
             <h2 className="text-2xl text-white font-poppinsBold">Welcome Back!</h2>
             <div className="flex flex-col items-center mt-12 gap-12">
