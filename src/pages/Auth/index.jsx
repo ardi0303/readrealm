@@ -26,13 +26,13 @@ export default function Auth() {
       const unsubscribe = onSnapshot(userRef, (doc) => {
         if (doc.exists()) {
           dispatch(setSaveBooks(doc.data().savedBooks || []));
+          if (user) {
+            toast.success(`Welcome back ${doc.data().fullName}`);
+          }
         } else {
           console.log("Books not found in Firestore.");
         }
       });
-      if (user) {
-        toast.success(`Welcome back ${doc.data().fullName}`);
-      }
       return unsubscribe;
     } catch (error) {
       console.error(error);
