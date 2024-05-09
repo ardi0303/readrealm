@@ -47,7 +47,7 @@ export default function Auth() {
         </div>
         <div className="bg-[#2A2A2A] min-h-screen flex items-center justify-center lg:w-1/3 w-screen">
           <div className="flex flex-col">
-            <h2 className="lg:text-2xl text-lg text-white font-poppinsBold">Welcome Back!</h2>
+            <h2 className="lg:text-2xl text-lg text-white font-poppinsBold ml-8 lg:ml-0">Welcome Back!</h2>
             <div className="flex flex-col items-center mt-12 gap-12">
               <img src={imgAuth} alt="Auth" className="h-24 w-24" />
               <form onSubmit={handleSignIn} className="flex flex-col lg:w-full mx-10 gap-4">
