@@ -5,10 +5,11 @@ import { useState, useEffect } from "react";
 import { auth } from "../../../firebase";
 import Auth from ".";
 import Home from "../Home";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 export const AuthPageHandler = ({ children }) => {
   const [isAuth, setIsAuth] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -24,7 +25,7 @@ export const AuthPageHandler = ({ children }) => {
     return null;
   }else if (isAuth) {
     if (children.type.name === "Auth") {
-      return <Navigate to="/" replace/>;
+      navigate(-1, { replace: true });;
     }
     return <>{children}</>;
   } else {

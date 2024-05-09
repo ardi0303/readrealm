@@ -74,7 +74,7 @@ export default function Auth() {
                 <button
                   type="submit"
                   className="bg-white text-black py-1 rounded-lg mt-2 mx-20 font-semibold"
-                  onClick={() => handleSignIn()}>Sign In</button>
+                  onClick={(e) => handleSignIn(e)}>Sign In</button>
               </form>
               <div className="flex justify-center">
                 <p
