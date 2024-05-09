@@ -38,7 +38,7 @@ export default function Auth() {
   if (!isLogin) return <Register backToLogin={() => setIsLogin(true)} />;
   return (
     <>
-      <div className="flex">
+      <div className="flex min-w-full">
         <div className="bg-bg-auth bg-cover lg:w-2/3 min-h-screen hidden lg:block">
           <div className="mx-20 my-32 flex flex-col gap-6">
             <h1 className="text-5xl text-white font-poppinsBold">Read</h1>
