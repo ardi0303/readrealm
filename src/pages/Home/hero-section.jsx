@@ -44,7 +44,7 @@ export default function HeroSection() {
     <div className="bg-bg-hero bg-cover">
       <div className="lg:mx-16 mx-8">
         <nav className="flex justify-between items-center py-4">
-          <h1 className="lg:text-3xl text-2xl font-bold text-white">ReadRealm.</h1>
+          <h1 className="lg:text-3xl text-2xl font-poppinsBold text-white">ReadRealm.</h1>
           <div className="flex gap-1">
             {isAuth ? (
               <div className="flex gap-1">
@@ -55,7 +55,7 @@ export default function HeroSection() {
                   <SaveIcon size="w-[25px] lg:w-[35px]" />
                 </button>
                 <button
-                  className="bg-[#FFF500] rounded-md lg:px-6 px-2 py-1 font-semibold"
+                  className="bg-[#FFF500] rounded-md lg:px-6 px-2 py-1 font-poppinsSemibold"
                   onClick={handleSignOut}
                 >
                   Sign Out
@@ -63,7 +63,7 @@ export default function HeroSection() {
               </div>
             ) : (
               <button
-                className="bg-[#FFF500] rounded-md lg:px-6 py-1 px-2 font-semibold"
+                className="bg-[#FFF500] rounded-md lg:px-6 py-1 px-2 font-poppinsSemibold"
                 onClick={handleSignIn}
               >
                 Sign In
@@ -73,12 +73,12 @@ export default function HeroSection() {
         </nav>
         <div className="flex flex-col lg:w-3/5 w-full gap-6 py-14">
           <div className="flex flex-col lg:gap-4 gap-1">
-            <h1 className="font-extrabold lg:text-5xl text-3xl text-white">
+            <h1 className="font-poppinExtraBold lg:text-5xl text-3xl text-white">
               Eksplorasi Dunia
             </h1>
-            <h1 className="font-extrabold lg:text-5xl text-3xl text-white">Buku Terbaik</h1>
+            <h1 className="font-poppinExtraBold lg:text-5xl text-3xl text-white">Buku Terbaik</h1>
           </div>
-          <p className="text-white lg:text-lg text-sm font-semibold">
+          <p className="text-white lg:text-lg text-sm font-poppinsSemibold">
             Tingkatkan petualangan literer Anda dengan menjelajahi dunia
             kata-kata melalui koleksi buku kami yang menakjubkan!
           </p>
@@ -89,7 +89,7 @@ export default function HeroSection() {
             <input
               type="text"
               placeholder="Search books..."
-              className="bg-transparent focus:outline-none text-white placeholder:font-semibold placeholder:text-white text-xs lg:text-base"
+              className="bg-transparent focus:outline-none text-white placeholder:font-poppinsSemibold placeholder:text-white text-xs lg:text-base"
               value={input}
               onChange={handleSearch}
             />

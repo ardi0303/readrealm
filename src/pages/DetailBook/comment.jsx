@@ -121,15 +121,15 @@ export default function Comment() {
 
   return (
     <div className="">
-      <h1 className="font-bold lg:text-xl">Komentar</h1>
+      <h1 className="font-poppinsBold lg:text-xl">Komentar</h1>
       <div className="mt-2 rounded-lg bg-[#262626] max-h-[200px] overflow-y-auto">
         {comments.map((comment, index) => (
           <div key={index} className="px-5 py-2 border-b border-white">
             <div className="flex justify-between items-center">
-              <p className="font-bold lg:text-lg">
+              <p className="font-poppinsBold lg:text-lg">
                 {comment.UID === currentUID ? "You" : comment.name}
               </p>
-              <p className="font-light lg:text-base text-xs">
+              <p className="font-poppinsRegular lg:text-base text-xs">
                 {dayjs(comment.createdAt).format("DD MMMM YYYY")}
               </p>
             </div>
@@ -139,19 +139,19 @@ export default function Comment() {
                   type="text"
                   value={editedCommentText}
                   onChange={(e) => setEditedCommentText(e.target.value)}
-                  className="rounded-lg px-2 py-1 focus: outline-none text-black w-full"
+                  className="rounded-lg px-2 py-1 focus: outline-none text-black w-full font-poppinsRegular"
                 />
               ) : (
-                <p className="w-4/5 text-sm">{comment.text}</p>
+                <p className="w-4/5 text-sm font-poppinsRegular">{comment.text}</p>
               )}
               {comment.UID === currentUID && (
                 <div>
                   {editingCommentId === index ? (
-                    <div className="flex gap-1">
-                      <button onClick={() => handleEditComment(index)} className="border border-white px-2">
+                    <div className="flex gap-1 font-poppinsRegular">
+                      <button onClick={() => handleEditComment(index)} className="border border-white lg:px-2 text-xs lg:text-base">
                         Save
                       </button>
-                      <button onClick={() => setEditingCommentId(null)} className="border border-white px-2">
+                      <button onClick={() => setEditingCommentId(null)} className="border border-white lg:px-2 text-xs lg:text-base">
                         Cancel
                       </button>
                     </div>
@@ -179,7 +179,7 @@ export default function Comment() {
             </div>
           </div>
         ))}
-        <div className="px-5 py-5">
+        <div className="px-5 py-5 font-poppinsRegular">
           <form
             onSubmit={handleAddComment}
             className="bg-[#CFCFCF] flex justify-between items-center rounded-2xl px-4 py-1"

@@ -47,13 +47,13 @@ export default function Register({ backToLogin }) {
     <div className="flex">
       <div className="bg-bg-auth bg-cover md:w-2/3 h-screen hidden md:block">
         <div className="mx-20 my-32 flex flex-col gap-6">
-          <h1 className="text-5xl text-white font-bold">Read</h1>
-          <h1 className="text-5xl text-white font-bold">Realm.</h1>
+          <h1 className="text-5xl text-white font-poppinsBold">Read</h1>
+          <h1 className="text-5xl text-white font-poppinsBold">Realm.</h1>
         </div>
       </div>
       <div className="bg-[#2A2A2A] min-h-screen flex items-center justify-center w-full md:w-1/3">
         <div className="">
-          <h2 className="text-2xl text-white font-bold">Create Account</h2>
+          <h2 className="text-2xl text-white font-poppinsBold">Create Account</h2>
           <div className="flex flex-col items-center mt-12 gap-12">
             <img src={imgAuth} alt="Auth" className="h-24 w-24" />
             <form
@@ -64,24 +64,24 @@ export default function Register({ backToLogin }) {
                 type="text"
                 placeholder="Full Name"
                 {...register("fullName", { ...requiredConfig })}
-                className="bg-transparent border-b-[1px] focus:outline-none text-white border-white placeholder:font-semibold placeholder:text-white"
+                className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white"
               />
               <input
                 type="email"
                 placeholder="Email"
                 {...register("email", { ...requiredConfig })}
-                className="bg-transparent border-b-[1px] focus:outline-none text-white border-white placeholder:font-semibold placeholder:text-white"
+                className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white"
                 autoComplete="off"
               />
               <input
                 type="password"
                 placeholder="Password"
                 {...register("password", { ...requiredConfig })}
-                className="bg-transparent border-b-[1px] focus:outline-none text-white border-white placeholder:font-semibold placeholder:text-white"
+                className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white"
               />
               <button
                 type="submit"
-                className="bg-white text-black py-1 rounded-lg mt-8 mx-20 font-semibold"
+                className="bg-white text-black py-1 rounded-lg mt-8 mx-20 font-poppinsSemibold"
                 onClick={() => handleRegister()}
               >
                 Sign Up
@@ -89,7 +89,7 @@ export default function Register({ backToLogin }) {
             </form>
             <div className="flex justify-center">
               <p
-                className="text-white underline cursor-pointer"
+                className="text-white underline cursor-pointer font-poppinsRegular"
                 onClick={backToLogin}
               >
                 Login

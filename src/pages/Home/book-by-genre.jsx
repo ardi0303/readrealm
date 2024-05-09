@@ -81,9 +81,12 @@ export default function BookByGenre() {
   return (
     <div>
       {Object.entries(data).map(([genre, genreData], index) => (
-        <div key={index} className="bg-transparent py-10 lg:px-10 px-6 rounded-3xl">
+        <div
+          key={index}
+          className="bg-transparent py-10 lg:px-10 px-6 rounded-3xl"
+        >
           <div className="flex justify-between items-center" id={genre}>
-            <h1 className="text-white font-bold text-3xl capitalize">
+            <h1 className="text-white font-poppinsBold text-3xl capitalize">
               {genre}
             </h1>
             <div className="flex gap-1">
@@ -122,7 +125,7 @@ export default function BookByGenre() {
                     />
                   </div>
                   <div className="text-white flex flex-col mt-6 gap-2 w-3/5">
-                    <h1 className="font-semibold lg:text-2xl text-lg truncate lg:line-clamp-2">
+                    <h1 className="font-poppinsSemibold lg:text-2xl text-lg truncate lg:line-clamp-2">
                       <Link
                         to={`/detail-book/${id}`}
                         onClick={() => handleDetailProduct(id)}
@@ -131,7 +134,7 @@ export default function BookByGenre() {
                       </Link>
                     </h1>
                     {volumeInfo?.authors && (
-                      <p className="text-sm truncate">
+                      <p className="text-sm truncate font-poppinsRegular">
                         By{" "}
                         {Array.isArray(volumeInfo.authors)
                           ? volumeInfo.authors.join(", ")

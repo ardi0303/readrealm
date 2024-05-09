@@ -46,7 +46,7 @@ export default function Favorites() {
   return (
     <div className="bg-[#2A2A2A] lg:px-16 px-8 lg:py-32 py-16 min-h-screen">
       <div className="lg:px-14 px-7">
-        <h1 className="text-white font-bold text-3xl">Favorites</h1>
+        <h1 className="text-white font-poppinsBold text-3xl">Favorites</h1>
         {savedBooks.length === 0 ? (
           <div className="flex justify-center items-center h-screen">
             <h1 className="text-white text-2xl">No saved books</h1>
@@ -69,7 +69,7 @@ export default function Favorites() {
                       />
                     </div>
                     <div className="lg:w-2/3 w-3/5 text-white flex flex-col lg:gap-4 gap-2">
-                      <h1 className="font-bold lg:text-2xl text-lg line-clamp-2 lg:truncate">
+                      <h1 className="font-poppinsBold lg:text-2xl text-lg line-clamp-2 lg:truncate">
                         <Link
                           to={`/detail-book/${data[index].id}`}
                           onClick={() => handleDetailProduct(data[index].id)}
@@ -78,7 +78,7 @@ export default function Favorites() {
                         </Link>
                       </h1>
                       <div>
-                        <p className="truncate text-xs lg:text-base">
+                        <p className="truncate text-xs lg:text-base font-poppinsRegular">
                           By {book.volumeInfo.authors.join(", ")}
                         </p>
                         <p className="truncate text-xs lg:text-base">
@@ -89,7 +89,7 @@ export default function Favorites() {
                         <a
                           href={book.volumeInfo.previewLink}
                           target="_blank"
-                          className="bg-[#FFF500] lg:px-5 px-2 lg:text-xl text-xs font-bold rounded-lg text-black flex items-center"
+                          className="bg-[#FFF500] lg:px-5 px-2 lg:text-xl text-xs font-poppinsBold rounded-lg text-black flex items-center"
                         >
                           Read Now
                         </a>

@@ -41,7 +41,7 @@ export default function NewReleases() {
   return (
     <div className="bg-[#383838] py-10 px-10 rounded-3xl">
       <div className="flex justify-between items-center">
-        <h1 className="text-white font-bold text-3xl">New Releases</h1>
+        <h1 className="text-white font-poppinsBold text-3xl">New Releases</h1>
         <div className="flex gap-1">
           {startIndex >= 4 && (
             <div
@@ -75,7 +75,7 @@ export default function NewReleases() {
                 />
               </div>
               <div className="text-white flex flex-col justify-center gap-2 w-2/3">
-                <h1 className="font-semibold lg:text-2xl truncate">
+                <h1 className="font-poppinsSemibold lg:text-2xl truncate">
                   <Link
                     to={`/detail-book/${data["new_releases"]?.items[index].id}`}
                     onClick={() =>
@@ -86,14 +86,14 @@ export default function NewReleases() {
                   </Link>
                 </h1>
                 {volumeInfo?.authors && (
-                  <p className="lg:text-sm text-xs truncate">
+                  <p className="lg:text-sm text-xs truncate font-poppinsRegular">
                     By{" "}
                     {Array.isArray(volumeInfo.authors)
                       ? volumeInfo.authors.join(", ")
                       : volumeInfo.authors}
                   </p>
                 )}
-                <p className="line-clamp-3 text-wrap text-xs font-semibold">
+                <p className="line-clamp-3 text-wrap text-xs font-poppinsSemibold">
                   {volumeInfo.description}
                 </p>
               </div>

@@ -147,9 +147,9 @@ export default function SideNav() {
             isMenuOpen ? "" : "hidden lg:block"
           } bg-[#2A2A2A] py-2 px-4 lg:py-0 lg:px-0 rounded-xl border border-white lg:border-none`}
         >
-          <h1 className="font-bold text-xl text-white">Book by Genre</h1>
+          <h1 className="font-poppinsBold text-xl text-white">Book by Genre</h1>
           <div className="mt-4">
-            <ul className="flex flex-col gap-2 text-white text-lg font-medium">
+            <ul className="flex flex-col gap-2 text-white text-lg font-poppinsSemibold">
               {genres.map((genre) => (
                 <li key={genre.id} onClick={() => scrollToSection(genre.id)}>
                   {genre.id === "more" ? (
@@ -184,7 +184,7 @@ export default function SideNav() {
       {showMoreModal && (
         <Modal onClose={toggleMoreModal}>
           <div className="text-white">
-            <h2 className="text-2xl font-bold mb-4">More Genres</h2>
+            <h2 className="text-2xl font-poppinsBold mb-4">More Genres</h2>
             <ul className="text-lg max-h-52 overflow-y-auto">
               {moreGenres.map((genre, index) => (
                 <li

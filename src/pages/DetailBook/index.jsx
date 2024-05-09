@@ -87,7 +87,7 @@ export default function DetailBook() {
   };
 
   return (
-    <div className="bg-[#2A2A2A] lg:px-16 px-8 lg:py-32 py-16">
+    <div className="bg-[#2A2A2A] lg:px-16 px-8 lg:py-32 py-16 min-h-screen">
       <div className="lg:px-14 px-7 lg:py-14 py-7 bg-[#383838] rounded-2xl">
         {isLoading ? (
           <div className="flex justify-center mt-10 h-screen">
@@ -105,9 +105,9 @@ export default function DetailBook() {
             <div className="lg:w-3/4 w-full text-white">
               <div className="flex flex-col gap-4">
                 <div>
-                  <h1 className="lg:text-3xl text-xl font-bold">{detailBooks?.title}</h1>
+                  <h1 className="lg:text-3xl text-xl font-poppinsBold">{detailBooks?.title}</h1>
                   {detailBooks?.authors && (
-                    <p className="lg:text-xl">
+                    <p className="lg:text-xl font-poppinsRegular">
                       By{" "}
                       {Array.isArray(detailBooks.authors)
                         ? detailBooks.authors.join(", ")
@@ -115,7 +115,7 @@ export default function DetailBook() {
                     </p>
                   )}
                 </div>
-                <p className="font-semibold lg:text-lg text-sm rounded-lg line-clamp-4">
+                <p className="font-poppinsSemibold lg:text-lg text-sm rounded-lg line-clamp-4">
                   Genre:{" "}
                   {Array.isArray(detailBooks?.categories)
                     ? detailBooks?.categories.join(", ")
@@ -123,7 +123,7 @@ export default function DetailBook() {
                 </p>
                 <div className="flex gap-2 ">
                   <a
-                    className="bg-[#FFF500] px-5 text-xl font-bold rounded-lg text-black flex items-center"
+                    className="bg-[#FFF500] px-5 text-xl font-poppinsBold rounded-lg text-black flex items-center"
                     href={detailBooks?.previewLink}
                     target="_blank"
                   >
@@ -146,7 +146,7 @@ export default function DetailBook() {
                   )}
                 </div>
                 <div>
-                  <p className="lg:text-base text-sm font-medium line-clamp-5">{bookDescription}</p>
+                  <p className="lg:text-base text-sm font-poppinsSemibold line-clamp-5">{bookDescription}</p>
                 </div>
                 <Comment booksId={booksId} />
               </div>
