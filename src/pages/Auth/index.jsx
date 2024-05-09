@@ -11,27 +11,33 @@ import { setSaveBooks } from "../../store/slice/book-slice";
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
   const [fullName, setFullName] = useState("");
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const user = await signInWithEmailAndPassword(auth, form.email, form.password)
+      const user = await signInWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
       const userRef = doc(db, "users", auth.currentUser?.uid);
       const unsubscribe = onSnapshot(userRef, (doc) => {
         if (doc.exists()) {
           dispatch(setSaveBooks(doc.data().savedBooks || []));
-          toast.success(`Welcome back ${doc.data().fullName}`);
         } else {
           console.log("Books not found in Firestore.");
         }
       });
+      if (user) {
+        toast.success(`Welcome back ${doc.data().fullName}`);
+      }
       return unsubscribe;
     } catch (error) {
       console.error(error);
-      if(error.code === 'auth/invalid-credential')
-      toast.error('User not found! Please register first!');
+      if (error.code === "auth/invalid-credential")
+        toast.error("User not found! Please register first!");
     }
   };
 
@@ -47,10 +53,15 @@ export default function Auth() {
         </div>
         <div className="bg-[#2A2A2A] min-h-screen flex items-center justify-center lg:w-1/3 w-screen">
           <div className="flex flex-col">
-            <h2 className="lg:text-2xl text-lg text-white font-poppinsBold ml-8 lg:ml-0">Welcome Back!</h2>
+            <h2 className="lg:text-2xl text-lg text-white font-poppinsBold ml-8 lg:ml-0">
+              Welcome Back!
+            </h2>
             <div className="flex flex-col items-center mt-12 gap-12">
               <img src={imgAuth} alt="Auth" className="h-24 w-24" />
-              <form onSubmit={handleSignIn} className="flex flex-col lg:w-full mx-10 gap-4">
+              <form
+                onSubmit={handleSignIn}
+                className="flex flex-col lg:w-full mx-10 gap-4"
+              >
                 <input
                   type="email"
                   placeholder="Email"
@@ -64,7 +75,9 @@ export default function Auth() {
                   placeholder="Password"
                   className="bg-transparent border-b-[1px] focus:outline-none text-white font-poppinsSemibold border-white placeholder:font-poppinsSemibold placeholder:text-white"
                   value={form.password}
-                  onChange={(e) => setForm({ ...form, password: e.target.value })}
+                  onChange={(e) =>
+                    setForm({ ...form, password: e.target.value })
+                  }
                 />
                 <div className="flex justify-end">
                   <p className="text-white text-sm cursor-pointer font-poppinsRegular">
@@ -74,7 +87,10 @@ export default function Auth() {
                 <button
                   type="submit"
                   className="bg-white text-black py-1 rounded-lg mt-2 mx-20 font-poppinsSemibold"
-                  onClick={(e) => handleSignIn(e)}>Sign In</button>
+                  onClick={(e) => handleSignIn(e)}
+                >
+                  Sign In
+                </button>
               </form>
               <div className="flex justify-center">
                 <p
