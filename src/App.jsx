@@ -6,7 +6,7 @@ import DetailBook from "./pages/DetailBook";
 import Favorites from "./pages/Favorites";
 import { AuthPageHandler } from "./pages/Auth/auth-page-handler";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -16,14 +16,7 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route
-              path="/auth"
-              element={
-                <AuthPageHandler>
-                  <Auth />
-                </AuthPageHandler>
-              }
-            />
+            <Route path="/auth" element={<AuthPageHandler />} />
             {/* Menggunakan AuthPageHandler langsung di dalam Route */}
             <Route
               path="/detail-book/:id"

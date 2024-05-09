@@ -24,10 +24,11 @@ export const AuthPageHandler = ({ children }) => {
   if (isAuth === null) {
     return null;
   }else if (isAuth) {
-    if (children.type.name === "Auth") {
-      navigate("/", { replace: true });;
+    if (children === undefined) {
+      return <Navigate to="/" />;
+    }else{
+      return <>{children}</>;
     }
-    return <>{children}</>;
   } else {
     return <Auth />;
   }
