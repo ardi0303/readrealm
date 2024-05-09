@@ -28,8 +28,9 @@ export default function Register({ backToLogin }) {
 
       setIsLoading(false);
       if (user) {
-        toast.success(`Welcome ${user.email}`);
+        toast.success(`Welcome ${data.fullName}`);
       }
+
     } catch (error) {
       console.error(error);
     }

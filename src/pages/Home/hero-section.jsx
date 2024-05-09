@@ -49,7 +49,7 @@ export default function HeroSection() {
             {isAuth ? (
               <div className="flex gap-1">
                 <button
-                  className="bg-white rounded-md"
+                  className="bg-white rounded-md px-1"
                   onClick={() => navigate("/favorites")}
                 >
                   <SaveIcon size="w-[25px] lg:w-[35px]" />

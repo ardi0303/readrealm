@@ -89,7 +89,7 @@ export default function Favorites() {
                         <a
                           href={book.volumeInfo.previewLink}
                           target="_blank"
-                          className="bg-[#FFF500] px-5 text-xl font-bold rounded-lg text-black flex items-center"
+                          className="bg-[#FFF500] lg:px-5 px-2 lg:text-xl text-xs font-bold rounded-lg text-black flex items-center"
                         >
                           Read Now
                         </a>
@@ -97,7 +97,7 @@ export default function Favorites() {
                           onClick={() => handleDeleteSavedBook(book.id)} // Assuming you pass the book id to delete
                           className="bg-white rounded-lg cursor-pointer"
                         >
-                          <SaveIcon size="w-[35px]" />
+                          <SaveIcon size="lg:w-[35px] w-[25px]" />
                         </div>
                       </div>
                     </div>
