@@ -22,8 +22,8 @@ export default function Register({ backToLogin }) {
 
       const userId = user.user.uid;
 
-      await setDoc(doc(collection(db, 'users'), userId), {
-        fullName: data.fullName
+      await setDoc(doc(collection(db, "users"), userId), {
+        fullName: data.fullName,
       });
 
       setIsLoading(false);
@@ -78,11 +78,13 @@ export default function Register({ backToLogin }) {
                 {...register("password", { ...requiredConfig })}
                 className="bg-transparent border-b-[1px] focus:outline-none text-white border-white placeholder:font-semibold placeholder:text-white"
               />
-              <input
+              <button
                 type="submit"
-                value="Sign Up"
                 className="bg-white text-black py-1 rounded-lg mt-8 mx-20 font-semibold"
-              />
+                onClick={() => handleRegister()}
+              >
+                Sign Up
+              </button>
             </form>
             <div className="flex justify-center">
               <p

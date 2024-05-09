@@ -55,7 +55,7 @@ export default function HeroSection() {
                   <SaveIcon size="w-[25px] lg:w-[35px]" />
                 </button>
                 <button
-                  className="bg-[#FFF500] rounded-md lg:px-6 px-2 font-semibold lg:text-base text-xs"
+                  className="bg-[#FFF500] rounded-md lg:px-6 px-2 py-1 font-semibold"
                   onClick={handleSignOut}
                 >
                   Sign Out
