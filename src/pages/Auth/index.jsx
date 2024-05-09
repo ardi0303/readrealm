@@ -4,7 +4,7 @@ import Register from "./register";
 import { toast } from "react-toastify";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import { setSaveBooks } from "../../store/slice/book-slice";
 
@@ -23,9 +23,16 @@ export default function Auth() {
         form.password
       );
       const userRef = doc(db, "users", auth.currentUser?.uid);
-      if (user) {
-        toast.success(`Welcome back ${doc.data().fullName}`);
+      const userSnapshot = await getDoc(userRef);
+      if (!userSnapshot.exists()) {
+        console.log("User not found in Firestore.");
+        return;
       }
+      const userData = userSnapshot.data();
+      if (user) {
+        toast.success(`Welcome back ${userData.fullName}`);
+      }
+
       const unsubscribe = onSnapshot(userRef, (doc) => {
         if (doc.exists()) {
           dispatch(setSaveBooks(doc.data().savedBooks || []));
