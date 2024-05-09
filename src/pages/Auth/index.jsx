@@ -50,7 +50,7 @@ export default function Auth() {
             <h2 className="text-2xl text-white font-poppinsBold">Welcome Back!</h2>
             <div className="flex flex-col items-center mt-12 gap-12">
               <img src={imgAuth} alt="Auth" className="h-24 w-24" />
-              <form onSubmit={handleSignIn} className="flex flex-col w-full mx-10 gap-4">
+              <form onSubmit={handleSignIn} className="flex flex-col lg:w-full mx-10 gap-4">
                 <input
                   type="email"
                   placeholder="Email"

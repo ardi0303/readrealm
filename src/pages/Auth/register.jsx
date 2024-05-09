@@ -58,7 +58,7 @@ export default function Register({ backToLogin }) {
             <img src={imgAuth} alt="Auth" className="h-24 w-24" />
             <form
               onSubmit={handleSubmit(handleRegister)}
-              className="flex flex-col w-full mx-10 gap-4"
+              className="flex flex-col lg:w-full mx-10 gap-4"
             >
               <input
                 type="text"
