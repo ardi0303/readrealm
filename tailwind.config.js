@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'bg-auth': "url('./src/assets/img/bgauth.jpg')",
-        'bg-hero': "url('./src/assets/img/bghero.png')",
+        'bg-auth': "url('/src/assets/img/bgauth.jpg')",
+        'bg-hero': "url('/src/assets/img/bghero.png')",
       }
     },
   },
