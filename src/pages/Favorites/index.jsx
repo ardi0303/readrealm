@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bookFetch } from "../../utils/booksFetch";
 import { setIdBooks, setSaveBooks } from "../../store/slice/book-slice";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Favorites() {
   const savedBooks = useSelector((state) => state.books.saveBooks);
@@ -29,6 +30,7 @@ export default function Favorites() {
         savedBooks: arrayRemove(booksId),
       });
       dispatch(setSaveBooks(savedBooks.filter((book) => book !== booksId)));
+      toast.success("Book deleted successfully");
     } catch (error) {
       console.error("Error deleting saved book:", error);
     }
