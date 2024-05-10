@@ -15,14 +15,17 @@ import {
 } from "firebase/firestore";
 import { setSaveBooks } from "../../store/slice/book-slice";
 import Modal from "../../components/modal";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { runChatBot } from "../../assets/chatbot";
+import { setMessage } from "../../store/slice/bot-slice";
+
 export default function DetailBook() {
   const { fetcher, data, isLoading } = bookFetch();
   const booksId = useSelector((state) => state.books.idBooks);
   const detailBooks = data.detail_books?.volumeInfo;
-  const bookDescription = detailBooks?.description?.replace(
-    /<\/?(p|b|br|ul|li|i)>|<\/li>/g,
-    ""
-  );
+  const bookDescription = detailBooks?.description
+    ?.replace(/<\/?(p|b|br|ul|li|i)>|<\/li>/g, "")
+    .replace(/&quot;/g, '"');
   const [isSaveBooks, setIsSaveBooks] = useState(false);
   const dispatch = useDispatch();
   const saveBooks = useSelector((state) => state.books.saveBooks);
@@ -51,12 +54,6 @@ export default function DetailBook() {
       console.error("Error checking saved books:", error);
     }
   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    getBooks();
-    checkSavedBooks();
-  }, []);
 
   const handleSaveBook = async () => {
     try {
@@ -90,13 +87,30 @@ export default function DetailBook() {
     setShowBot(!showBot);
   };
 
-  const [request, setRequest] = useState("");
-  const [message, setMessage] = useState([
-    {
-      text: "Hello, how can I help you?",
-      isBot: true,
-    },
-  ]);
+  const [inputRequest, setInputRequest] = useState("");
+  const message = useSelector((state) => state.bot.message);
+
+  const handleSendRequest = async () => {
+    try {
+      setInputRequest("");
+      const botResponse = await runChatBot(inputRequest);
+      dispatch(
+        setMessage([
+          ...message,
+          { text: inputRequest, isBot: false },
+          { text: botResponse, isBot: true },
+        ])
+      );
+    } catch (error) {
+      console.error("Error sending request:", error);
+    }
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getBooks();
+    checkSavedBooks();
+  }, []);
 
   return (
     <div className="bg-[#2A2A2A] lg:px-16 px-8 lg:py-32 py-16 min-h-screen">
@@ -182,8 +196,8 @@ export default function DetailBook() {
         <Modal onClose={handleShowBot}>
           <div className="text-white">
             <h2 className="text-2xl font-poppinsBold mb-4">Chat Bot</h2>
-            <div className="flex flex-col p-4 gap-4">
-              <div className="flex flex-col gap-2 items-start w-full px-2">
+            <div className="flex flex-col p-4 gap-4 max-h-[600px] lg:max-h-[400px] overflow-y-auto">
+              <div className="flex flex-col gap-2 items-start w-full px-2 text-black">
                 {message.map((msg, index) => {
                   return (
                     <div
@@ -192,7 +206,7 @@ export default function DetailBook() {
                         msg.isBot ? "bg-gray-300" : "bg-gray-200 ml-auto"
                       } p-2 rounded-lg`}
                     >
-                      <p className="text-xs">{msg.isBot ? "Bot" : "User"}</p>
+                      <p className="text-xs">{msg.isBot ? "Bot" : "You"}</p>
                       <p>{msg.text}</p>
                     </div>
                   );
@@ -201,14 +215,15 @@ export default function DetailBook() {
               <div className="flex gap-2 w-full">
                 <input
                   type="text"
-                  value={request}
-                  onChange={(e) => setRequest(e.target.value)}
-                  className="rounded-full w-full"
+                  value={inputRequest}
+                  onChange={(e) => setInputRequest(e.target.value)}
+                  className="rounded-full w-full text-black px-4"
                   placeholder="Ask me anything..."
                 />
                 <button
                   className="bg-gray-700 text-white px-6 py-1 rounded-lg"
                   disabled={isLoading}
+                  onClick={() => handleSendRequest()}
                 >
                   {isLoading ? "Loading..." : "Send"}
                 </button>

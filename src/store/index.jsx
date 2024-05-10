@@ -1,5 +1,5 @@
 // store.js
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import bookSlice from "./slice/book-slice"; // Ubah path sesuai struktur proyek Anda
+import botSlice from "./slice/bot-slice";
 
 const persistConfig = {
   key: "root",
@@ -19,12 +20,14 @@ const persistConfig = {
   blacklist: ["searchBooks"], 
 };
 
-const persistedReducer = persistReducer(persistConfig, bookSlice);
+const rootReducer = combineReducers({
+  books: persistReducer(persistConfig, bookSlice),
+  bot: botSlice,
+});
+
 
 export const store = configureStore({
-  reducer: {
-    books: persistedReducer, // Gunakan reducer yang telah di-persist
-  },
+  reducer: rootReducer,
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -18,8 +18,8 @@ export default function Modal({ children, onClose }) {
   }, [onClose]);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-20">
-      <div className="bg-[#2A2A2A] p-4 rounded-lg" ref={modalRef}>
+    <div className="fixed top-0 left-0 w-full px-10 h-full bg-black bg-opacity-50 flex justify-center items-center z-20">
+      <div className="bg-[#2A2A2A] p-4 rounded-lg max-h-[800px] lg:max-h-[500px]" ref={modalRef}>
         <div className="flex justify-end">
           <button
             className="border border-white text-white py-1 px-1 rounded-md"

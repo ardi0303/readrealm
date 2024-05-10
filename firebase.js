@@ -7,7 +7,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "readrealm-db47b.firebaseapp.com",
   projectId: "readrealm-db47b",
   storageBucket: "readrealm-db47b.appspot.com",

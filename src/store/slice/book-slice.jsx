@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { set } from "firebase/database"
 
 const initialState = {
   searchBooks: "",
