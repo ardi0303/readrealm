@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../../../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {
   const [input, setInput] = useState("");
@@ -44,7 +44,9 @@ export default function HeroSection() {
     <div className="bg-bg-hero bg-cover">
       <div className="lg:mx-16 mx-8">
         <nav className="flex justify-between items-center py-4">
-          <h1 className="lg:text-3xl text-2xl font-poppinsBold text-white">ReadRealm.</h1>
+          <h1 className="lg:text-3xl text-2xl font-poppinsBold text-white">
+            ReadRealm.
+          </h1>
           <div className="flex gap-1">
             {isAuth ? (
               <div className="flex gap-1">
@@ -76,7 +78,9 @@ export default function HeroSection() {
             <h1 className="font-poppinExtraBold lg:text-5xl text-3xl text-white">
               Eksplorasi Dunia
             </h1>
-            <h1 className="font-poppinExtraBold lg:text-5xl text-3xl text-white">Buku Terbaik</h1>
+            <h1 className="font-poppinExtraBold lg:text-5xl text-3xl text-white">
+              Buku Terbaik
+            </h1>
           </div>
           <p className="text-white lg:text-lg text-sm font-poppinsSemibold">
             Tingkatkan petualangan literer Anda dengan menjelajahi dunia

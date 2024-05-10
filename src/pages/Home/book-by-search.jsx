@@ -49,12 +49,16 @@ export default function BookBySearch() {
         <div className={`${searchBooks === "" ? "fade-out" : "fade-in"}`}>
           {data["by_search"]?.totalItems === 0 ? (
             <div className="bg-[#383838] py-10 px-10 rounded-3xl">
-              <h1 className="text-white font-poppinsBold text-3xl">No Books Found</h1>
+              <h1 className="text-white font-poppinsBold text-3xl">
+                No Books Found
+              </h1>
             </div>
           ) : (
             <div className="bg-[#383838] py-10 px-10 rounded-3xl">
               <div className="flex justify-between items-center">
-                <h1 className="text-white font-poppinsBold text-3xl">{searchBooks}</h1>
+                <h1 className="text-white font-poppinsBold text-3xl">
+                  {searchBooks}
+                </h1>
                 <div className="flex gap-1">
                   {startIndex >= 4 && (
                     <div
@@ -92,7 +96,9 @@ export default function BookBySearch() {
                           <Link
                             to={`/detail-book/${data["by_search"]?.items[index].id}`}
                             onClick={() =>
-                              handleDetailProduct(data["by_search"]?.items[index].id)
+                              handleDetailProduct(
+                                data["by_search"]?.items[index].id
+                              )
                             }
                           >
                             {volumeInfo.title}

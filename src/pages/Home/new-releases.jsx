@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { bookFetch } from "../../utils/booksFetch";
 import { Loader, NextIcon, PrevIcon } from "../../assets/icon";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setIdBooks } from "../../store/slice/book-slice";
 import { Link } from "react-router-dom";
 

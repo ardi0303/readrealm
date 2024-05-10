@@ -17,11 +17,14 @@ export default function Comment() {
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
   const booksId = useSelector((state) => state.books.idBooks);
-  const [currentUID, setCurrentUID] = useState("");
+  const currentUID = auth.currentUser?.uid; 
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editedCommentText, setEditedCommentText] = useState("");
+  const userRef = doc(db, "users", currentUID);
+  const bookRef = doc(db, "books", booksId);
 
   const fetchComment = async () => {
     try {
-      const bookRef = doc(db, "books", booksId);
       const unsubscribe = onSnapshot(bookRef, (doc) => {
         if (doc.exists()) {
           setComments(doc.data().comments || []);
@@ -35,39 +38,27 @@ export default function Comment() {
     }
   };
 
-  useEffect(() => {
-    fetchComment();
-    setCurrentUID(auth.currentUser?.uid || "");
-  }, []);
-
   async function handleAddComment(e) {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const userRef = doc(db, "users", auth.currentUser?.uid);
       const userSnapshot = await getDoc(userRef);
-      if (!userSnapshot.exists()) {
-        console.log("User not found in Firestore.");
-        return;
-      }
-
       const userData = userSnapshot.data();
-      const postRef = doc(db, "books", booksId);
-      const postSnapshot = await getDoc(postRef);
-      if (postSnapshot.exists()) {
-        await updateDoc(postRef, {
+      const bookSnapshot = await getDoc(bookRef);
+      if (bookSnapshot.exists()) {
+        await updateDoc(bookRef, {
           comments: arrayUnion({
-            UID: auth.currentUser?.uid,
+            UID: currentUID,
             text: newComment,
             createdAt: dayjs().format(),
             name: userData.fullName,
           }),
         });
       } else {
-        await setDoc(postRef, {
+        await setDoc(bookRef, {
           comments: [
             {
-              UID: auth.currentUser?.uid,
+              UID: currentUID,
               text: newComment,
               createdAt: dayjs().format(),
               name: userData.fullName,
@@ -82,8 +73,6 @@ export default function Comment() {
     }
   }
 
-  const [editingCommentId, setEditingCommentId] = useState(null);
-  const [editedCommentText, setEditedCommentText] = useState("");
   const handleEditComment = async (commentIndex) => {
     try {
       const updatedComments = comments.map((comment, index) => {
@@ -95,9 +84,7 @@ export default function Comment() {
         }
         return comment;
       });
-
-      const postRef = doc(db, "books", booksId);
-      await updateDoc(postRef, {
+      await updateDoc(bookRef, {
         comments: updatedComments,
       });
       setEditingCommentId(null);
@@ -109,15 +96,20 @@ export default function Comment() {
 
   const handleDeleteComment = async (commentIndex) => {
     try {
-      const updatedComments = comments.filter((_, index) => index !== commentIndex);
-      const postRef = doc(db, "books", booksId);
-      await updateDoc(postRef, {
+      const updatedComments = comments.filter(
+        (_, index) => index !== commentIndex
+      );
+      await updateDoc(bookRef, {
         comments: updatedComments,
       });
     } catch (error) {
       console.error("Error deleting comment:", error);
     }
   };
+
+  useEffect(() => {
+    fetchComment();
+  }, []);
 
   return (
     <div className="">
@@ -142,16 +134,24 @@ export default function Comment() {
                   className="rounded-lg px-2 py-1 focus: outline-none text-black w-full font-poppinsRegular"
                 />
               ) : (
-                <p className="w-4/5 text-sm font-poppinsRegular">{comment.text}</p>
+                <p className="w-4/5 text-sm font-poppinsRegular">
+                  {comment.text}
+                </p>
               )}
               {comment.UID === currentUID && (
                 <div>
                   {editingCommentId === index ? (
                     <div className="flex gap-1 font-poppinsRegular">
-                      <button onClick={() => handleEditComment(index)} className="border border-white lg:px-2 text-xs lg:text-base">
+                      <button
+                        onClick={() => handleEditComment(index)}
+                        className="border border-white lg:px-2 text-xs lg:text-base"
+                      >
                         Save
                       </button>
-                      <button onClick={() => setEditingCommentId(null)} className="border border-white lg:px-2 text-xs lg:text-base">
+                      <button
+                        onClick={() => setEditingCommentId(null)}
+                        className="border border-white lg:px-2 text-xs lg:text-base"
+                      >
                         Cancel
                       </button>
                     </div>
@@ -192,7 +192,9 @@ export default function Comment() {
               onChange={(e) => setNewComment(e.target.value)}
             />
             <button type="submit" className="text-black" disabled={isLoading}>
-              {isLoading ? "Loading..." : (
+              {isLoading ? (
+                "Loading..."
+              ) : (
                 <div>
                   <SendIcon />
                 </div>

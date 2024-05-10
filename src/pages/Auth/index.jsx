@@ -10,7 +10,6 @@ import { setSaveBooks } from "../../store/slice/book-slice";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
-  const [fullName, setFullName] = useState("");
   const [form, setForm] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
 
@@ -24,15 +23,10 @@ export default function Auth() {
       );
       const userRef = doc(db, "users", auth.currentUser?.uid);
       const userSnapshot = await getDoc(userRef);
-      if (!userSnapshot.exists()) {
-        console.log("User not found in Firestore.");
-        return;
-      }
       const userData = userSnapshot.data();
       if (user) {
         toast.success(`Welcome back ${userData.fullName}`);
       }
-
       const unsubscribe = onSnapshot(userRef, (doc) => {
         if (doc.exists()) {
           dispatch(setSaveBooks(doc.data().savedBooks || []));

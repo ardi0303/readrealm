@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Loader, SaveIcon } from "../../assets/icon";
-import thumbnail from "../../assets/img/thumbnail.png";
 import { arrayRemove, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
 import { useDispatch, useSelector } from "react-redux";

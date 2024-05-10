@@ -4,16 +4,13 @@ import { CloseIcon, MenuIcon } from "../../assets/icon";
 import Modal from "../../components/modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchBooks } from "../../store/slice/book-slice";
-import { set } from "firebase/database";
 
 export default function SideNav() {
   const [isFixed, setIsFixed] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle menu
-  const [showMoreModal, setShowMoreModal] = useState(false); // State to toggle more modal
-  const searchBooks = useSelector((state) => state.books.searchBooks);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const [showMoreModal, setShowMoreModal] = useState(false);
   const dispatch = useDispatch();
-
   const genres = [
     {
       id: "fiction",

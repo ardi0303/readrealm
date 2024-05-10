@@ -25,6 +25,8 @@ export default function DetailBook() {
   const [isSaveBooks, setIsSaveBooks] = useState(false);
   const dispatch = useDispatch();
   const saveBooks = useSelector((state) => state.books.saveBooks);
+  const currentUID = auth.currentUser?.uid;
+  const userRef = doc(db, "users", currentUID);
 
   const getBooks = async () => {
     try {
@@ -33,10 +35,8 @@ export default function DetailBook() {
       console.error(`Error fetching ${booksId} data:`, error);
     }
   };
-
   const checkSavedBooks = async () => {
     try {
-      const userRef = doc(db, "users", auth.currentUser?.uid);
       const unsubscribe = onSnapshot(userRef, (doc) => {
         if (doc.exists()) {
           const savedBooks = doc.data().savedBooks || [];
@@ -58,7 +58,6 @@ export default function DetailBook() {
 
   const handleSaveBook = async () => {
     try {
-      const userRef = doc(db, "users", auth.currentUser?.uid);
       const userSnapshot = await getDoc(userRef);
       if (userSnapshot.exists()) {
         await updateDoc(userRef, {
@@ -76,7 +75,6 @@ export default function DetailBook() {
   };
   const handleDeleteSavedBook = async () => {
     try {
-      const userRef = doc(db, "users", auth.currentUser?.uid);
       await updateDoc(userRef, {
         savedBooks: arrayRemove(booksId),
       });
@@ -105,7 +103,9 @@ export default function DetailBook() {
             <div className="lg:w-3/4 w-full text-white">
               <div className="flex flex-col gap-4">
                 <div>
-                  <h1 className="lg:text-3xl text-xl font-poppinsBold">{detailBooks?.title}</h1>
+                  <h1 className="lg:text-3xl text-xl font-poppinsBold">
+                    {detailBooks?.title}
+                  </h1>
                   {detailBooks?.authors && (
                     <p className="lg:text-xl font-poppinsRegular">
                       By{" "}
@@ -146,7 +146,9 @@ export default function DetailBook() {
                   )}
                 </div>
                 <div>
-                  <p className="lg:text-base text-sm font-poppinsSemibold line-clamp-5">{bookDescription}</p>
+                  <p className="lg:text-base text-sm font-poppinsSemibold line-clamp-5">
+                    {bookDescription}
+                  </p>
                 </div>
                 <Comment booksId={booksId} />
               </div>

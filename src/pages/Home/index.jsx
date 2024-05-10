@@ -13,7 +13,7 @@ export default function Home() {
       if ("scrollRestoration" in history) {
         history.scrollRestoration = "manual";
       }
-    }, 100); 
+    }, 100);
     return () => clearTimeout(timer);
   }, []);
   return (

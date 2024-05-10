@@ -17,7 +17,6 @@ export default function BookByGenre() {
     for (let i = 0; i < genre.length; i++) {
       newIsLoadingGenres[genre[i]] = true;
       setIsLoadingGenres(newIsLoadingGenres);
-
       try {
         if (genre[i] === "fiction") {
           await fetcher(
@@ -51,7 +50,6 @@ export default function BookByGenre() {
       } catch (error) {
         console.error(`Error fetching ${genre[i]} data:`, error);
       }
-
       newIsLoadingGenres[genre[i]] = false;
       setIsLoadingGenres(newIsLoadingGenres);
     }
