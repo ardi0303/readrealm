@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SaveIcon, SearchIcon } from "../../assets/icon";
 import { setSearchBooks } from "../../store/slice/book-slice";
 import { useEffect, useState } from "react";
@@ -35,6 +35,7 @@ export default function HeroSection() {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+      dispatch(setSearchBooks(""));
       toast.success("Signed out successfully!");
     } catch (error) {
       console.error(error);
@@ -51,7 +52,7 @@ export default function HeroSection() {
             {isAuth ? (
               <div className="flex gap-1">
                 <button
-                  className="bg-white rounded-md px-1"
+                  className="bg-white rounded-md px-1 lg:px-0"
                   onClick={() => navigate("/favorites")}
                 >
                   <SaveIcon size="w-[25px] lg:w-[35px]" />

@@ -81,10 +81,10 @@ export default function BookBySearch() {
                   <Loader />
                 </div>
               ) : (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
                   {data["by_search"]?.items.map(({ volumeInfo }, index) => (
                     <div className="flex" key={volumeInfo.id || index}>
-                      <div className="w-1/3">
+                      <div className="w-1/3 flex justify-center">
                         <img
                           src={volumeInfo.imageLinks?.thumbnail}
                           alt=""

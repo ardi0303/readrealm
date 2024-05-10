@@ -109,13 +109,13 @@ export default function BookByGenre() {
               <Loader />
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {genreData.items.map(({ id, volumeInfo }, index) => (
                 <div
                   key={index}
                   className="flex from-[#383838] bg-gradient-to-b px-8 rounded-xl lg:gap-4 gap-2 mt-10"
                 >
-                  <div className="w-2/5">
+                  <div className="w-2/5 flex justify-center">
                     <img
                       src={volumeInfo.imageLinks?.thumbnail}
                       alt=""

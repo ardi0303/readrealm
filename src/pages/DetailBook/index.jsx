@@ -14,6 +14,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { setSaveBooks } from "../../store/slice/book-slice";
+import Modal from "../../components/modal";
 export default function DetailBook() {
   const { fetcher, data, isLoading } = bookFetch();
   const booksId = useSelector((state) => state.books.idBooks);
@@ -27,6 +28,7 @@ export default function DetailBook() {
   const saveBooks = useSelector((state) => state.books.saveBooks);
   const currentUID = auth.currentUser?.uid;
   const userRef = doc(db, "users", currentUID);
+  const [showBot, setShowBot] = useState(false);
 
   const getBooks = async () => {
     try {
@@ -84,6 +86,18 @@ export default function DetailBook() {
     }
   };
 
+  const handleShowBot = () => {
+    setShowBot(!showBot);
+  };
+
+  const [request, setRequest] = useState("");
+  const [message, setMessage] = useState([
+    {
+      text: "Hello, how can I help you?",
+      isBot: true,
+    },
+  ]);
+
   return (
     <div className="bg-[#2A2A2A] lg:px-16 px-8 lg:py-32 py-16 min-h-screen">
       <div className="lg:px-14 px-7 lg:py-14 py-7 bg-[#383838] rounded-2xl">
@@ -103,9 +117,17 @@ export default function DetailBook() {
             <div className="lg:w-3/4 w-full text-white">
               <div className="flex flex-col gap-4">
                 <div>
-                  <h1 className="lg:text-3xl text-xl font-poppinsBold">
-                    {detailBooks?.title}
-                  </h1>
+                  <div className="flex justify-between">
+                    <h1 className="lg:text-3xl text-xl font-poppinsBold">
+                      {detailBooks?.title}
+                    </h1>
+                    <button
+                      onClick={handleShowBot}
+                      className="bg-blue-400 rounded-lg cursor-pointer"
+                    >
+                      Show Bot
+                    </button>
+                  </div>
                   {detailBooks?.authors && (
                     <p className="lg:text-xl font-poppinsRegular">
                       By{" "}
@@ -156,6 +178,45 @@ export default function DetailBook() {
           </div>
         )}
       </div>
+      {showBot && (
+        <Modal onClose={handleShowBot}>
+          <div className="text-white">
+            <h2 className="text-2xl font-poppinsBold mb-4">Chat Bot</h2>
+            <div className="flex flex-col p-4 gap-4">
+              <div className="flex flex-col gap-2 items-start w-full px-2">
+                {message.map((msg, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`${
+                        msg.isBot ? "bg-gray-300" : "bg-gray-200 ml-auto"
+                      } p-2 rounded-lg`}
+                    >
+                      <p className="text-xs">{msg.isBot ? "Bot" : "User"}</p>
+                      <p>{msg.text}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="flex gap-2 w-full">
+                <input
+                  type="text"
+                  value={request}
+                  onChange={(e) => setRequest(e.target.value)}
+                  className="rounded-full w-full"
+                  placeholder="Ask me anything..."
+                />
+                <button
+                  className="bg-gray-700 text-white px-6 py-1 rounded-lg"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Loading..." : "Send"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

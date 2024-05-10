@@ -44,7 +44,7 @@ export default function Favorites() {
 
   return (
     <div className="bg-[#2A2A2A] lg:px-16 px-8 lg:py-32 py-16 min-h-screen">
-      <div className="lg:px-14 px-7">
+      <div className="lg:px-14">
         <h1 className="text-white font-poppinsBold text-3xl">Favorites</h1>
         {savedBooks.length === 0 ? (
           <div className="flex justify-center items-center h-screen">
@@ -60,11 +60,11 @@ export default function Favorites() {
               <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 mt-4">
                 {Object.values(data).map((book, index) => (
                   <div key={index} className="flex gap-4">
-                    <div className="lg:w-1/3 w-2/5">
+                    <div className="lg:w-1/3 w-2/5 flex justify-center">
                       <img
                         src={book.volumeInfo.imageLinks?.thumbnail}
                         alt=""
-                        className="w-full lg:h-52 h-40 fade-in rounded-lg"
+                        className="w-28 lg:w-40 lg:h-52 h-40 fade-in rounded-lg"
                       />
                     </div>
                     <div className="lg:w-2/3 w-3/5 text-white flex flex-col lg:gap-4 gap-2">
