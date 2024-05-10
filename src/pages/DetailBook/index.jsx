@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { bookFetch } from "../../utils/booksFetch";
-import { Loader, SaveIcon, UnSaveIcon } from "../../assets/icon";
+import { BotIcon, Loader, SaveIcon, UnSaveIcon } from "../../assets/icon";
 import Comment from "./comment";
 import { auth, db } from "../../../firebase";
 import {
@@ -15,8 +15,7 @@ import {
 } from "firebase/firestore";
 import { setSaveBooks } from "../../store/slice/book-slice";
 import Modal from "../../components/modal";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { runChatBot } from "../../assets/chatbot";
+import { runChatBot } from "../../chatbot";
 import { setMessage } from "../../store/slice/bot-slice";
 
 export default function DetailBook() {
@@ -32,6 +31,8 @@ export default function DetailBook() {
   const currentUID = auth.currentUser?.uid;
   const userRef = doc(db, "users", currentUID);
   const [showBot, setShowBot] = useState(false);
+  const [inputRequest, setInputRequest] = useState("");
+  const message = useSelector((state) => state.bot.message);
 
   const getBooks = async () => {
     try {
@@ -87,9 +88,6 @@ export default function DetailBook() {
     setShowBot(!showBot);
   };
 
-  const [inputRequest, setInputRequest] = useState("");
-  const message = useSelector((state) => state.bot.message);
-
   const handleSendRequest = async () => {
     try {
       setInputRequest("");
@@ -132,15 +130,9 @@ export default function DetailBook() {
               <div className="flex flex-col gap-4">
                 <div>
                   <div className="flex justify-between">
-                    <h1 className="lg:text-3xl text-xl font-poppinsBold">
+                    <h1 className="lg:text-3xl text-xl font-poppinsBold truncate">
                       {detailBooks?.title}
                     </h1>
-                    <button
-                      onClick={handleShowBot}
-                      className="bg-blue-400 rounded-lg cursor-pointer"
-                    >
-                      Show Bot
-                    </button>
                   </div>
                   {detailBooks?.authors && (
                     <p className="lg:text-xl font-poppinsRegular">
@@ -154,7 +146,7 @@ export default function DetailBook() {
                 <p className="font-poppinsSemibold lg:text-lg text-sm rounded-lg line-clamp-4">
                   Genre:{" "}
                   {Array.isArray(detailBooks?.categories)
-                    ? detailBooks?.categories.join(", ")
+                    ? detailBooks?.categories?.join(", ")
                     : detailBooks?.categories}
                 </p>
                 <div className="flex gap-2 ">
@@ -165,6 +157,12 @@ export default function DetailBook() {
                   >
                     Read Now
                   </a>
+                  <button
+                    onClick={handleShowBot}
+                    className="bg-black rounded-lg cursor-pointer flex items-center justify-center"
+                  >
+                    <BotIcon size={35} />
+                  </button>
                   {!isSaveBooks ? (
                     <div
                       onClick={() => handleSaveBook()}

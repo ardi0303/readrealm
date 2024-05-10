@@ -78,10 +78,10 @@ export default function Favorites() {
                       </h1>
                       <div>
                         <p className="truncate text-xs lg:text-base font-poppinsRegular">
-                          By {book.volumeInfo.authors.join(", ")}
+                          By {book.volumeInfo.authors?.join(", ")}
                         </p>
                         <p className="truncate text-xs lg:text-base">
-                          Genre: {book.volumeInfo.categories.join(", ")}
+                          Genre: {book.volumeInfo.categories?.join(", ")}
                         </p>
                       </div>
                       <div className="flex gap-1">
