@@ -186,7 +186,7 @@ export default function SideNav() {
               {moreGenres.map((genre, index) => (
                 <li
                   key={index}
-                  className="mb-2 cursor-pointer"
+                  className="mb-2 cursor-pointer font-poppinsRegular"
                   onClick={() => {
                     handleSearch(genre);
                     scrollToSection("book-by-search");

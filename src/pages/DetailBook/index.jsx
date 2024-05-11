@@ -33,6 +33,7 @@ export default function DetailBook() {
   const [showBot, setShowBot] = useState(false);
   const [inputRequest, setInputRequest] = useState("");
   const message = useSelector((state) => state.bot.message);
+  const [isLoadingBot, setIsLoadingBot] = useState(false);
 
   const getBooks = async () => {
     try {
@@ -91,6 +92,7 @@ export default function DetailBook() {
   const handleSendRequest = async () => {
     try {
       setInputRequest("");
+      setIsLoadingBot(true);
       const botResponse = await runChatBot(inputRequest);
       dispatch(
         setMessage([
@@ -99,6 +101,7 @@ export default function DetailBook() {
           { text: botResponse, isBot: true },
         ])
       );
+      setIsLoadingBot(false);
     } catch (error) {
       console.error("Error sending request:", error);
     }
@@ -204,8 +207,8 @@ export default function DetailBook() {
                         msg.isBot ? "bg-gray-300" : "bg-gray-200 ml-auto"
                       } p-2 rounded-lg`}
                     >
-                      <p className="text-xs">{msg.isBot ? "Bot" : "You"}</p>
-                      <p>{msg.text}</p>
+                      <p className="text-xs font-poppinsSemibold">{msg.isBot ? "Bot" : "You"}</p>
+                      <p className="font-poppinsRegular">{msg.text}</p>
                     </div>
                   );
                 })}
@@ -215,15 +218,15 @@ export default function DetailBook() {
                   type="text"
                   value={inputRequest}
                   onChange={(e) => setInputRequest(e.target.value)}
-                  className="rounded-full w-full text-black px-4"
+                  className="rounded-full w-full text-black px-4 font-poppinsRegular placeholder:font-poppinsRegular"
                   placeholder="Ask me anything..."
                 />
                 <button
-                  className="bg-gray-700 text-white px-6 py-1 rounded-lg"
-                  disabled={isLoading}
+                  className="bg-gray-700 text-white px-6 py-1 rounded-lg font-poppinsSemibold"
+                  disabled={isLoadingBot}
                   onClick={() => handleSendRequest()}
                 >
-                  {isLoading ? "Loading..." : "Send"}
+                  {isLoadingBot ? "Loading..." : "Send"}
                 </button>
               </div>
             </div>

@@ -87,14 +87,14 @@ export default function HeroSection() {
             Tingkatkan petualangan literer Anda dengan menjelajahi dunia
             kata-kata melalui koleksi buku kami yang menakjubkan!
           </p>
-          <div className="flex items-center w-48 border-white border-b">
+          <div className="flex items-center lg:w-[400px] w-full border-white border-b">
             <div>
               <SearchIcon />
             </div>
             <input
               type="text"
-              placeholder="Search books..."
-              className="bg-transparent focus:outline-none text-white placeholder:font-poppinsSemibold placeholder:text-white text-xs lg:text-base"
+              placeholder="Search books by title, genre, author, and etc..."
+              className="bg-transparent focus:outline-none text-white placeholder:font-poppinsSemibold placeholder:text-white text-xs lg:text-base font-poppinsSemibold w-full"
               value={input}
               onChange={handleSearch}
             />
