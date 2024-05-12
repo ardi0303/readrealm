@@ -33,7 +33,7 @@ export default function Register({ backToLogin }) {
 
   return (
     <div className="flex">
-      <div className="bg-bg-auth bg-cover lg:w-2/3 h-screen hidden lg:block">
+      <div className="bg-bg-auth bg-cover lg:w-2/3 min-h-screen hidden lg:block">
         <div className="mx-20 my-32 flex flex-col gap-6">
           <h1 className="text-5xl text-white font-poppinsBold">Read</h1>
           <h1 className="text-5xl text-white font-poppinsBold">Realm.</h1>
@@ -44,11 +44,11 @@ export default function Register({ backToLogin }) {
           <h2 className="lg:text-2xl text-lg text-white font-poppinsBold">
             Create Account
           </h2>
-          <div className="flex flex-col items-center mt-12 gap-12">
+          <div className="flex flex-col items-center mt-12 gap-10">
             <img src={imgAuth} alt="Auth" className="h-24 w-24" />
             <form
               onSubmit={handleSubmit(handleRegister)}
-              className="flex flex-col gap-4 w-full"
+              className="flex flex-col gap-2 w-full"
             >
               <div className="">
                 <input
@@ -104,7 +104,7 @@ export default function Register({ backToLogin }) {
 
               <button
                 type="submit"
-                className="bg-white text-black py-1 rounded-lg mt-8 mx-20 font-poppinsSemibold"
+                className="bg-white text-black py-1 rounded-lg mt-6 mx-20 font-poppinsSemibold"
               >
                 Sign Up
               </button>
