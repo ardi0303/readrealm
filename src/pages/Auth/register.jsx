@@ -40,7 +40,7 @@ export default function Register({ backToLogin }) {
         </div>
       </div>
       <div className="bg-[#2A2A2A] min-h-screen flex items-center justify-center lg:w-1/3 w-screen">
-        <div className="flex flex-col w-full mx-8">
+        <div className="flex flex-col w-full mx-14">
           <h2 className="lg:text-2xl text-lg text-white font-poppinsBold">
             Create Account
           </h2>
