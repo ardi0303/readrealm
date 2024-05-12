@@ -55,7 +55,7 @@ export default function Register({ backToLogin }) {
                   type="text"
                   placeholder="Full Name"
                   {...register("fullName", {
-                    required: "This field is required",
+                    required: "Please enter your full name",
                   })}
                   className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white w-full"
                 />
@@ -70,7 +70,7 @@ export default function Register({ backToLogin }) {
                   type="email"
                   placeholder="Email"
                   {...register("email", {
-                    required: "This field is required",
+                    required: "Please enter a valid email address",
                     pattern: {
                       value:
                         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
@@ -89,10 +89,10 @@ export default function Register({ backToLogin }) {
                   type="password"
                   placeholder="Password"
                   {...register("password", {
-                    required: "This field is required",
+                    required: "Please enter a valid password with at least 6 characters",
                     minLength: {
                       value: 6,
-                      message: "Password must be at least 6 characters",
+                      message: "Please enter a valid password with at least 6 characters",
                     },
                   })}
                   className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white w-full"

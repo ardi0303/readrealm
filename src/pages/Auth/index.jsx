@@ -33,6 +33,7 @@ export default function Auth() {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    validateInput();
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -59,10 +60,6 @@ export default function Auth() {
         toast.error("User not found! Please register first!");
     }
   };
-
-  useEffect(() => {
-    validateInput();
-  }, [form]);
 
   if (!isLogin) return <Register backToLogin={() => setIsLogin(true)} />;
   return (
@@ -97,9 +94,9 @@ export default function Auth() {
                     }
                   />
                   {errorMessages.email && (
-                    <p className="text-red-500 text-xs font-poppinsRegular">
+                    <span className="text-red-500 text-xs font-poppinsRegular">
                       {errorMessages.email}
-                    </p>
+                    </span>
                   )}
                 </div>
                 <div>
@@ -113,9 +110,9 @@ export default function Auth() {
                     }
                   />
                   {errorMessages.password && (
-                    <p className="text-red-500 text-xs font-poppinsRegular">
+                    <span className="text-red-500 text-xs font-poppinsRegular">
                       {errorMessages.password}
-                    </p>
+                    </span>
                   )}
                 </div>
                 <button
