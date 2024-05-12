@@ -6,7 +6,11 @@ import { toast } from "react-toastify";
 import { collection, doc, setDoc } from "firebase/firestore";
 
 export default function Register({ backToLogin }) {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
 
   const handleRegister = async (data) => {
     try {
@@ -27,13 +31,6 @@ export default function Register({ backToLogin }) {
     }
   };
 
-  const requiredConfig = {
-    required: {
-      value: true,
-      message: "This field is required",
-    },
-  };
-
   return (
     <div className="flex">
       <div className="bg-bg-auth bg-cover lg:w-2/3 h-screen hidden lg:block">
@@ -43,39 +40,71 @@ export default function Register({ backToLogin }) {
         </div>
       </div>
       <div className="bg-[#2A2A2A] min-h-screen flex items-center justify-center lg:w-1/3 w-screen">
-        <div className="flex flex-col">
-          <h2 className="lg:text-2xl text-lg text-white font-poppinsBold ml-8 lg:ml-0">
+        <div className="flex flex-col w-full mx-8">
+          <h2 className="lg:text-2xl text-lg text-white font-poppinsBold">
             Create Account
           </h2>
           <div className="flex flex-col items-center mt-12 gap-12">
             <img src={imgAuth} alt="Auth" className="h-24 w-24" />
             <form
               onSubmit={handleSubmit(handleRegister)}
-              className="flex flex-col lg:w-full mx-10 gap-4"
+              className="flex flex-col gap-4 w-full"
             >
-              <input
-                type="text"
-                placeholder="Full Name"
-                {...register("fullName", { ...requiredConfig })}
-                className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                {...register("email", { ...requiredConfig })}
-                className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white"
-                autoComplete="off"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                {...register("password", { ...requiredConfig })}
-                className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white"
-              />
+              <div className="">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  {...register("fullName", {
+                    required: "This field is required",
+                  })}
+                  className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white w-full"
+                />
+                {errors.fullName && (
+                  <span className="text-red-500 text-xs font-poppinsRegular">
+                    {errors.fullName.message}
+                  </span>
+                )}
+              </div>
+              <div>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  {...register("email", {
+                    required: "This field is required",
+                    pattern: {
+                      value:
+                        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                      message: "Please enter a valid email address",
+                    },
+                  })}
+                  className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white w-full"
+                  autoComplete="off"
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-xs font-poppinsRegular">{errors.email.message}</span>
+                )}
+              </div>
+              <div>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  {...register("password", {
+                    required: "This field is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                  className="bg-transparent border-b-[1px] focus:outline-none text-white border-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white w-full"
+                />
+                {errors.password && (
+                  <span className="text-red-500 text-xs font-poppinsRegular">{errors.password.message}</span>
+                )}
+              </div>
+
               <button
                 type="submit"
                 className="bg-white text-black py-1 rounded-lg mt-8 mx-20 font-poppinsSemibold"
-                onClick={() => handleRegister()}
               >
                 Sign Up
               </button>

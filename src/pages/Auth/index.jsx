@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import imgAuth from "../../assets/img/auth.png";
 import Register from "./register";
 import { toast } from "react-toastify";
@@ -12,6 +12,24 @@ export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
+  const [errorMessages, setErrorMessages] = useState({
+    email: "",
+    password: "",
+  });
+
+  const validateInput = () => {
+    const errors = {};
+    const validRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!form.email || !validRegex.test(form.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+    if (!form.password || form.password.length < 6) {
+      errors.password =
+        "Please enter a valid password with at least 6 characters";
+    }
+    setErrorMessages(errors);
+  };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -42,6 +60,10 @@ export default function Auth() {
     }
   };
 
+  useEffect(() => {
+    validateInput();
+  }, [form]);
+
   if (!isLogin) return <Register backToLogin={() => setIsLogin(true)} />;
   return (
     <>
@@ -53,33 +75,49 @@ export default function Auth() {
           </div>
         </div>
         <div className="bg-[#2A2A2A] min-h-screen flex items-center justify-center lg:w-1/3 w-screen">
-          <div className="flex flex-col">
-            <h2 className="lg:text-2xl text-lg text-white font-poppinsBold ml-8 lg:ml-0">
+          <div className="flex flex-col w-full mx-8">
+            <h2 className="lg:text-2xl text-lg text-white font-poppinsBold">
               Welcome Back!
             </h2>
             <div className="flex flex-col items-center mt-12 gap-12">
               <img src={imgAuth} alt="Auth" className="h-24 w-24" />
               <form
                 onSubmit={handleSignIn}
-                className="flex flex-col lg:w-full mx-10 gap-4"
+                className="flex flex-col gap-4 w-full"
               >
-                <input
-                  type="email"
-                  placeholder="Email"
-                  autoComplete="off"
-                  className="bg-transparent border-b-[1px] focus:outline-none text-white font-poppinsSemibold border-white placeholder:font-poppinsSemibold placeholder:text-white"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="bg-transparent border-b-[1px] focus:outline-none text-white font-poppinsSemibold border-white placeholder:font-poppinsSemibold placeholder:text-white"
-                  value={form.password}
-                  onChange={(e) =>
-                    setForm({ ...form, password: e.target.value })
-                  }
-                />
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    autoComplete="off"
+                    className="bg-transparent border-b-[1px] border-white focus:outline-none text-white font-poppinsSemibold placeholder:font-poppinsSemibold placeholder:text-white w-full"
+                    value={form.email}
+                    onChange={(e) =>
+                      setForm({ ...form, email: e.target.value })
+                    }
+                  />
+                  {errorMessages.email && (
+                    <p className="text-red-500 text-xs font-poppinsRegular">
+                      {errorMessages.email}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    className="bg-transparent border-b-[1px] focus:outline-none text-white font-poppinsSemibold border-white placeholder:font-poppinsSemibold placeholder:text-white w-full"
+                    value={form.password}
+                    onChange={(e) =>
+                      setForm({ ...form, password: e.target.value })
+                    }
+                  />
+                  {errorMessages.password && (
+                    <p className="text-red-500 text-xs font-poppinsRegular">
+                      {errorMessages.password}
+                    </p>
+                  )}
+                </div>
                 <div className="flex justify-end">
                   <p className="text-white text-sm cursor-pointer font-poppinsRegular">
                     Forget Password?
