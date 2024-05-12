@@ -5,6 +5,7 @@ import BookByGenre from "./book-by-genre";
 import BookBySearch from "./book-by-search";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import Footer from "./footer";
 
 export default function Home() {
   const searchBooks = useSelector((state) => state.books.searchBooks);
@@ -34,9 +35,7 @@ export default function Home() {
           <BookByGenre />
         </div>
       </div>
-      <footer className="bg-[#2A2A2A]">
-        <p>ini footer</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

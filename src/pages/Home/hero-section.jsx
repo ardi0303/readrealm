@@ -93,7 +93,7 @@ export default function HeroSection() {
             </div>
             <input
               type="text"
-              placeholder="Search books by title, genre, author, and etc..."
+              placeholder="Search books by title, author, genre, and etc..."
               className="bg-transparent focus:outline-none text-white placeholder:font-poppinsSemibold placeholder:text-white text-xs lg:text-base font-poppinsSemibold w-full"
               value={input}
               onChange={handleSearch}
