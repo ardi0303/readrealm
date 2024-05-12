@@ -33,7 +33,6 @@ export default function Auth() {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    validateInput();
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -60,6 +59,10 @@ export default function Auth() {
         toast.error("User not found! Please register first!");
     }
   };
+
+  useEffect(() => {
+    validateInput();
+  }, [form]);
 
   if (!isLogin) return <Register backToLogin={() => setIsLogin(true)} />;
   return (
