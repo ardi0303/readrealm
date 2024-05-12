@@ -118,11 +118,6 @@ export default function Auth() {
                     </p>
                   )}
                 </div>
-                <div className="flex justify-end">
-                  <p className="text-white text-sm cursor-pointer font-poppinsRegular">
-                    Forget Password?
-                  </p>
-                </div>
                 <button
                   type="submit"
                   className="bg-white text-black py-1 rounded-lg mt-2 mx-20 font-poppinsSemibold"
