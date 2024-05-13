@@ -89,7 +89,8 @@ export default function DetailBook() {
     setShowBot(!showBot);
   };
 
-  const handleSendRequest = async () => {
+  const handleSendRequest = async (e) => {
+    e.preventDefault();
     try {
       setInputRequest("");
       setIsLoadingBot(true);
@@ -207,13 +208,15 @@ export default function DetailBook() {
                         msg.isBot ? "bg-gray-300" : "bg-gray-200 ml-auto"
                       } p-2 rounded-lg`}
                     >
-                      <p className="text-xs font-poppinsSemibold">{msg.isBot ? "Bot" : "You"}</p>
+                      <p className="text-xs font-poppinsSemibold">
+                        {msg.isBot ? "Bot" : "You"}
+                      </p>
                       <p className="font-poppinsRegular">{msg.text}</p>
                     </div>
                   );
                 })}
               </div>
-              <div className="flex gap-2 w-full">
+              <form className="flex gap-2 w-full" onSubmit={handleSendRequest}>
                 <input
                   type="text"
                   value={inputRequest}
@@ -222,13 +225,13 @@ export default function DetailBook() {
                   placeholder="Ask me anything..."
                 />
                 <button
+                  type="submit"
                   className="bg-gray-700 text-white px-6 py-1 rounded-lg font-poppinsSemibold"
                   disabled={isLoadingBot}
-                  onClick={() => handleSendRequest()}
                 >
                   {isLoadingBot ? "Loading..." : "Send"}
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </Modal>
