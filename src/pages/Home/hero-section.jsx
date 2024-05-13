@@ -6,6 +6,7 @@ import { auth } from "../../../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { setMessage } from "../../store/slice/bot-slice";
 
 export default function HeroSection() {
   const [input, setInput] = useState("");
@@ -36,6 +37,11 @@ export default function HeroSection() {
     try {
       await signOut(auth);
       dispatch(setSearchBooks(""));
+      dispatch(
+        setMessage(
+          [{ text: "Hello, how can I help you?", isBot: true }]
+        )
+      );
       toast.success("Signed out successfully!");
     } catch (error) {
       console.error(error);
