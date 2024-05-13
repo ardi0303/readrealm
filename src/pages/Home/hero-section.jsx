@@ -38,9 +38,9 @@ export default function HeroSection() {
       await signOut(auth);
       dispatch(setSearchBooks(""));
       dispatch(
-        setMessage(
-          [{ text: "Hello, how can I help you?", isBot: true }]
-        )
+        setMessage([
+          { text: "Hello, how can I help you?", isBot: true },
+        ])
       );
       toast.success("Signed out successfully!");
     } catch (error) {
